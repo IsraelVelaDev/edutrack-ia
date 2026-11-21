@@ -1,0 +1,122 @@
+// Prisma schema - Sistema Inteligente de Calificaciones Universitario
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Estudiante {
+  id        String      @id @default(cuid())
+  codigo    String      @unique
+  nombre    String
+  apellido  String
+  semestre  Int
+  carrera   String
+  passwordHash String?
+  notas     Nota[]
+  analisis  AnalisisIA[]
+  respuestas RespuestaEstudiante[]
+  createdAt DateTime    @default(now())
+}
+
+model Materia {
+  id            String       @id @default(cuid())
+  codigo         String      @unique
+  nombre        String
+  semestre      Int
+  color         String
+  descripcion   String
+  evaluaciones  Evaluacion[]
+  preguntas     Pregunta[]
+  analisis      AnalisisIA[]
+  createdAt     DateTime     @default(now())
+}
+
+model Evaluacion {
+  id           String   @id @default(cuid())
+  materiaId    String
+  nombre       String
+  peso         Float    // porcentaje 0-100
+  tema         String
+  competencia  String
+  fecha        DateTime
+  esDeBanco    Boolean  @default(false) // true si fue creada desde el banco de preguntas
+  materia      Materia  @relation(fields: [materiaId], references: [id], onDelete: Cascade)
+  notas        Nota[]
+  preguntas    EvaluacionPregunta[]
+  respuestas   RespuestaEstudiante[]
+  createdAt    DateTime @default(now())
+}
+
+model Nota {
+  id               String      @id @default(cuid())
+  estudianteId    String
+  evaluacionId    String
+  valor            Float       // 0-100
+  observacion      String?
+  respuestaEjemplo String?     // evidencia (manual o autogenerada al rendir)
+  estudiante       Estudiante  @relation(fields: [estudianteId], references: [id], onDelete: Cascade)
+  evaluacion       Evaluacion  @relation(fields: [evaluacionId], references: [id], onDelete: Cascade)
+  respuesta        RespuestaEstudiante?
+  createdAt        DateTime    @default(now())
+}
+
+model AnalisisIA {
+  id              String      @id @default(cuid())
+  estudianteId    String
+  materiaId       String?
+  brechas         String      // JSON: lista de brechas de aprendizaje
+  recomendaciones String      // JSON: lista de recomendaciones
+  ejercicios      String      // JSON: lista de ejercicios de refuerzo
+  resumen         String
+  meta            String?     // JSON: modelo, prompt, parámetros y validaciones
+  createdAt       DateTime    @default(now())
+  estudiante      Estudiante  @relation(fields: [estudianteId], references: [id], onDelete: Cascade)
+  materia         Materia?    @relation(fields: [materiaId], references: [id], onDelete: SetNull)
+}
+
+// --- Banco de preguntas ---
+
+model Pregunta {
+  id            String   @id @default(cuid())
+  materiaId     String
+  tema          String
+  competencia   String
+  enunciado     String
+  opciones      String   // JSON array de strings (las opciones)
+  correcta      Int      // índice de la opción correcta
+  explicacion   String   // por qué la opción correcta lo es (feedback + evidencia IA)
+  dificultad    String   // basico | intermedio | avanzado
+  materia       Materia  @relation(fields: [materiaId], references: [id], onDelete: Cascade)
+  enEvaluaciones EvaluacionPregunta[]
+  createdAt     DateTime @default(now())
+}
+
+model EvaluacionPregunta {
+  id           String     @id @default(cuid())
+  evaluacionId String
+  preguntaId   String
+  evaluacion   Evaluacion @relation(fields: [evaluacionId], references: [id], onDelete: Cascade)
+  pregunta     Pregunta   @relation(fields: [preguntaId], references: [id], onDelete: Cascade)
+  orden        Int        @default(0)
+  @@unique([evaluacionId, preguntaId])
+}
+
+model RespuestaEstudiante {
+  id            String     @id @default(cuid())
+  estudianteId  String
+  evaluacionId  String
+  notaId        String?    @unique  // enlace a la Nota autocreada
+  respuestas    String     // JSON: { preguntaId: indiceSeleccionado }
+  puntaje       Float      // 0-100
+  correctas     Int
+  total         Int
+  createdAt     DateTime   @default(now())
+  estudiante    Estudiante @relation(fields: [estudianteId], references: [id], onDelete: Cascade)
+  evaluacion    Evaluacion @relation(fields: [evaluacionId], references: [id], onDelete: Cascade)
+  nota          Nota?      @relation(fields: [notaId], references: [id], onDelete: SetNull)
+}

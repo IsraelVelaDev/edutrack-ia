@@ -1,0 +1,544 @@
+[
+  {
+    "codigo": "EST-001",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Relaciones y funciones, Teoría de grafos, Arreglos, Listas enlazadas, Pilas y colas, Árboles, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización, Consultas avanzadas\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "meta": {
+        "modelo": null,
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": null,
+        "prompt": "",
+        "desdeCache": false,
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        }
+      },
+      "brechas": [],
+      "recomendaciones": [],
+      "ejercicios": [],
+      "resumen": "Todas las evaluaciones están en 70/100 o más. No se detectan brechas que requieran refuerzo."
+    }
+  },
+  {
+    "codigo": "EST-002",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n- Sintaxis y variables (Implementación) 55/100\n- Estructuras de control (Resolución de problemas) 48/100 | Evidencia: // Ejercicio: clasificar nota if (nota >= 90) { console.log(\"A\") } if (nota >= 80) { console.log(\"B\") } // usa if en cadena en lugar de else if if (nota >= 60) { console.log(\"C\") } // \"Una nota de 95 muestra A, B y C porque cumplen todas las condiciones.\"\n- Funciones y modularidad (Diseño) 52/100\n- Depuración de código (Análisis) 45/100 | Evidencia: function promedio(notas) { let suma = 0 for i = 0; i < notas.length; i++ // olvidó 'let' y punto y coma suma = notas[i] // usa '=' en vez de '+=' return suma / notas.length } // \"El error creo que está en que la función no retorna nada.\"\n- Conjuntos (Abstracción) 65/100\n- Relaciones y funciones (Razonamiento) 68/100\n- Teoría de grafos (Modelización) 60/100\n- Arreglos (Implementación) 50/100\n- Listas enlazadas (Implementación) 45/100\n- Pilas y colas (Análisis) 55/100\n- Árboles (Diseño) 42/100 | Evidencia: // Recorrido in-order de BST function inorder(node) { console.log(node.value) // visita raíz primero (pre-order, no in-order) inorder(node.left) inorder(node.right) } // \"In-order es visitar la raíz, luego izquierda, luego derecha.\"\n- Consultas avanzadas (Diseño) 68/100\nTemas aprobados: Lógica proposicional, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "brechas": [
+        {
+          "tema": "Árboles",
+          "competencia": "Diseño",
+          "severidad": "alta",
+          "descripcion": "Confusión en el orden de visita de nodos para recorridos de árboles (in-order vs. pre-order).",
+          "evidencia": "Visita la raíz primero (console.log(node.value)) en lugar de entre subárboles."
+        },
+        {
+          "tema": "Depuración de código",
+          "competencia": "Análisis",
+          "severidad": "alta",
+          "descripcion": "Errores sintácticos y lógicos básicos en la implementación de funciones.",
+          "evidencia": "Olvidó 'let' y punto y coma en for; usó '=' en vez de '+='."
+        },
+        {
+          "tema": "Estructuras de control",
+          "competencia": "Resolución de problemas",
+          "severidad": "alta",
+          "descripcion": "Uso incorrecto de condicionales, generando múltiples resultados inesperados.",
+          "evidencia": "Usa 'if' en cadena en lugar de 'else if', lo que evalúa todas las condiciones."
+        },
+        {
+          "tema": "Listas enlazadas",
+          "competencia": "Implementación",
+          "severidad": "alta",
+          "descripcion": "Dificultad en la implementación de estructuras de datos dinámicas.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        }
+      ],
+      "recomendaciones": [
+        {
+          "titulo": "Repaso de Estructuras de Control",
+          "descripcion": "Estudiar 'if-else if-else' para evitar evaluaciones múltiples y lógicas erróneas.",
+          "tipo": "repaso",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Práctica de Depuración",
+          "descripcion": "Realizar ejercicios de identificación y corrección de errores sintácticos y lógicos.",
+          "tipo": "ejercicio",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Visualización de Árboles",
+          "descripcion": "Usar herramientas visuales para entender los recorridos de árboles binarios.",
+          "tipo": "recurso",
+          "prioridad": "alta"
+        }
+      ],
+      "ejercicios": [
+        {
+          "titulo": "Clasificador de Notas Mejorado",
+          "enunciado": "Escribe una función que clasifique una nota (0-100) en A, B, C, D, F usando 'else if'.",
+          "dificultad": "basico",
+          "tema": "Estructuras de control",
+          "pista": "Usa 'else if' para asegurar que solo una condición se cumpla."
+        },
+        {
+          "titulo": "Función Promedio Correcta",
+          "enunciado": "Corrige la función 'promedio' para que calcule correctamente el promedio de un arreglo de números.",
+          "dificultad": "basico",
+          "tema": "Depuración de código",
+          "pista": "Revisa la sintaxis del bucle 'for' y la operación de suma."
+        },
+        {
+          "titulo": "Recorrido In-order de BST",
+          "enunciado": "Implementa la función de recorrido in-order para un árbol de búsqueda binario.",
+          "dificultad": "intermedio",
+          "tema": "Árboles",
+          "pista": "El orden es: subárbol izquierdo, nodo actual, subárbol derecho."
+        }
+      ],
+      "resumen": "Se detectan brechas significativas en estructuras de control, depuración y algoritmos de árboles, evidenciando errores lógicos y sintácticos. Es crucial reforzar estos fundamentos para mejorar la comprensión y aplicación de conceptos.",
+      "meta": {
+        "modelo": "google/gemini-2.5-flash",
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": {
+          "entrada": 703,
+          "salida": 905
+        },
+        "prompt": "Materia: varias\nNotas bajas (<70):\n- Sintaxis y variables (Implementación) 55/100\n- Estructuras de control (Resolución de problemas) 48/100 | Evidencia: // Ejercicio: clasificar nota if (nota >= 90) { console.log(\"A\") } if (nota >= 80) { console.log(\"B\") } // usa if en cadena en lugar de else if if (nota >= 60) { console.log(\"C\") } // \"Una nota de 95 muestra A, B y C porque cumplen todas las condiciones.\"\n- Funciones y modularidad (Diseño) 52/100\n- Depuración de código (Análisis) 45/100 | Evidencia: function promedio(notas) { let suma = 0 for i = 0; i < notas.length; i++ // olvidó 'let' y punto y coma suma = notas[i] // usa '=' en vez de '+=' return suma / notas.length } // \"El error creo que está en que la función no retorna nada.\"\n- Conjuntos (Abstracción) 65/100\n- Relaciones y funciones (Razonamiento) 68/100\n- Teoría de grafos (Modelización) 60/100\n- Arreglos (Implementación) 50/100\n- Listas enlazadas (Implementación) 45/100\n- Pilas y colas (Análisis) 55/100\n- Árboles (Diseño) 42/100 | Evidencia: // Recorrido in-order de BST function inorder(node) { console.log(node.value) // visita raíz primero (pre-order, no in-order) inorder(node.left) inorder(node.right) } // \"In-order es visitar la raíz, luego izquierda, luego derecha.\"\n- Consultas avanzadas (Diseño) 68/100\nTemas aprobados: Lógica proposicional, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        },
+        "desdeCache": false
+      }
+    }
+  },
+  {
+    "codigo": "EST-003",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n- Teoría de grafos (Modelización) 50/100 | Evidencia: // Ejercicio: diferencia entre grafo dirigido y no dirigido // \"Un grafo dirigido es aquel donde las aristas tienen flecha // y el no dirigido el que se dibuja con líneas.\" // definición por apariencia, no conceptual\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Relaciones y funciones, Arreglos, Listas enlazadas, Pilas y colas, Árboles, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización, Consultas avanzadas\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "brechas": [
+        {
+          "tema": "Teoría de grafos",
+          "competencia": "Modelización",
+          "severidad": "alta",
+          "descripcion": "Confunde la definición conceptual de grafo dirigido/no dirigido con su representación visual.",
+          "evidencia": "\"Un grafo dirigido es aquel donde las aristas tienen flecha y el no dirigido el que se dibuja con líneas.\""
+        }
+      ],
+      "recomendaciones": [
+        {
+          "titulo": "Revisar Teoría de Grafos",
+          "descripcion": "Estudiar la definición formal y propiedades de grafos dirigidos y no dirigidos.",
+          "tipo": "repaso",
+          "prioridad": "alta"
+        }
+      ],
+      "ejercicios": [
+        {
+          "titulo": "Clasificación de Grafos",
+          "enunciado": "Define y diferencia conceptualmente un grafo dirigido de uno no dirigido.",
+          "dificultad": "basico",
+          "tema": "Teoría de grafos",
+          "pista": "Piensa en la simetría de las relaciones."
+        }
+      ],
+      "resumen": "Se detecta una brecha en Teoría de Grafos, específicamente en la comprensión conceptual de grafos dirigidos y no dirigidos. Es crucial reforzar la base teórica para evitar futuras confusiones en modelización.",
+      "meta": {
+        "modelo": "google/gemini-2.5-flash",
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": {
+          "entrada": 382,
+          "salida": 232
+        },
+        "prompt": "Materia: varias\nNotas bajas (<70):\n- Teoría de grafos (Modelización) 50/100 | Evidencia: // Ejercicio: diferencia entre grafo dirigido y no dirigido // \"Un grafo dirigido es aquel donde las aristas tienen flecha // y el no dirigido el que se dibuja con líneas.\" // definición por apariencia, no conceptual\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Relaciones y funciones, Arreglos, Listas enlazadas, Pilas y colas, Árboles, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización, Consultas avanzadas\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        },
+        "desdeCache": false
+      }
+    }
+  },
+  {
+    "codigo": "EST-004",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n- Relaciones y funciones (Razonamiento) 68/100\n- Teoría de grafos (Modelización) 65/100\n- Modelo entidad-relación (Modelización) 48/100\n- SQL básico (SELECT, JOIN) (Implementación) 52/100 | Evidencia: SELECT * FROM estudiantes, notas // \"Para combinar tablas solo las pongo en el FROM separadas por coma.\"\n- Normalización (Análisis) 45/100 | Evidencia: // Tabla: Ventas(id_venta, cliente, producto, categoria, precio_unit, total) // \"Esta tabla está bien porque guarda todo en un solo lugar, // es más rápido consultar sin hacer JOINs.\"\n- Consultas avanzadas (Diseño) 40/100\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Arreglos, Listas enlazadas, Pilas y colas, Árboles\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "brechas": [
+        {
+          "tema": "Normalización",
+          "competencia": "Análisis",
+          "severidad": "alta",
+          "descripcion": "Confusión sobre redundancia y eficiencia en bases de datos.",
+          "evidencia": "\"Esta tabla está bien porque guarda todo en un solo lugar, es más rápido consultar sin hacer JOINs.\""
+        },
+        {
+          "tema": "Modelo entidad-relación",
+          "competencia": "Modelización",
+          "severidad": "alta",
+          "descripcion": "Dificultad en el diseño conceptual de bases de datos.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        },
+        {
+          "tema": "SQL básico (SELECT, JOIN)",
+          "competencia": "Implementación",
+          "severidad": "media",
+          "descripcion": "Error fundamental en la sintaxis y lógica de JOINs.",
+          "evidencia": "SELECT * FROM estudiantes, notas // \"Para combinar tablas solo las pongo en el FROM separadas por coma.\""
+        },
+        {
+          "tema": "Consultas avanzadas",
+          "competencia": "Diseño",
+          "severidad": "media",
+          "descripcion": "Problemas para formular consultas complejas y optimizadas.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        }
+      ],
+      "recomendaciones": [
+        {
+          "titulo": "Fundamentos de Normalización",
+          "descripcion": "Revisar formas normales y sus objetivos.",
+          "tipo": "repaso",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Práctica de JOINs",
+          "descripcion": "Realizar ejercicios variados con diferentes tipos de JOIN.",
+          "tipo": "ejercicio",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Diseño ERD",
+          "descripcion": "Estudiar ejemplos y practicar la creación de diagramas ER.",
+          "tipo": "recurso",
+          "prioridad": "media"
+        }
+      ],
+      "ejercicios": [
+        {
+          "titulo": "Normalización de Ventas",
+          "enunciado": "Normaliza la tabla Ventas(id_venta, cliente, producto, categoria, precio_unit, total) a 3FN.",
+          "dificultad": "intermedio",
+          "tema": "Normalización",
+          "pista": "Identifica dependencias funcionales y atributos no clave."
+        },
+        {
+          "titulo": "JOIN de Estudiantes y Notas",
+          "enunciado": "Combina las tablas 'estudiantes' y 'notas' para mostrar nombre del estudiante y su calificación.",
+          "dificultad": "basico",
+          "tema": "SQL básico (SELECT, JOIN)",
+          "pista": "Usa INNER JOIN con la columna común entre ambas tablas."
+        },
+        {
+          "titulo": "Diseño de Base de Datos para Biblioteca",
+          "enunciado": "Diseña un modelo entidad-relación para una biblioteca con libros, autores y préstamos.",
+          "dificultad": "intermedio",
+          "tema": "Modelo entidad-relación",
+          "pista": "Identifica entidades, atributos y relaciones entre ellas."
+        }
+      ],
+      "resumen": "Se detectan brechas significativas en diseño y consulta de bases de datos, especialmente en normalización y SQL. Es crucial reforzar estos fundamentos para un mejor desempeño.",
+      "meta": {
+        "modelo": "google/gemini-2.5-flash",
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": {
+          "entrada": 471,
+          "salida": 560
+        },
+        "prompt": "Materia: varias\nNotas bajas (<70):\n- Relaciones y funciones (Razonamiento) 68/100\n- Teoría de grafos (Modelización) 65/100\n- Modelo entidad-relación (Modelización) 48/100\n- SQL básico (SELECT, JOIN) (Implementación) 52/100 | Evidencia: SELECT * FROM estudiantes, notas // \"Para combinar tablas solo las pongo en el FROM separadas por coma.\"\n- Normalización (Análisis) 45/100 | Evidencia: // Tabla: Ventas(id_venta, cliente, producto, categoria, precio_unit, total) // \"Esta tabla está bien porque guarda todo en un solo lugar, // es más rápido consultar sin hacer JOINs.\"\n- Consultas avanzadas (Diseño) 40/100\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Arreglos, Listas enlazadas, Pilas y colas, Árboles\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        },
+        "desdeCache": false
+      }
+    }
+  },
+  {
+    "codigo": "EST-005",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Relaciones y funciones, Teoría de grafos, Arreglos, Listas enlazadas, Pilas y colas, Árboles, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización, Consultas avanzadas\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "meta": {
+        "modelo": null,
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": null,
+        "prompt": "",
+        "desdeCache": false,
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        }
+      },
+      "brechas": [],
+      "recomendaciones": [],
+      "ejercicios": [],
+      "resumen": "Todas las evaluaciones están en 70/100 o más. No se detectan brechas que requieran refuerzo."
+    }
+  },
+  {
+    "codigo": "EST-006",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n- Estructuras de control (Resolución de problemas) 50/100\n- Funciones y modularidad (Diseño) 48/100\n- Depuración de código (Análisis) 45/100\n- Lógica proposicional (Razonamiento) 48/100\n- Conjuntos (Abstracción) 52/100\n- Relaciones y funciones (Razonamiento) 45/100\n- Teoría de grafos (Modelización) 40/100 | Evidencia: // Ejercicio: ¿Es conexo el grafo G con aristas {(1,2),(2,3)} y vértices {1,2,3,4}? // \"Sí, porque hay aristas que conectan los vértices.\"\n- Arreglos (Implementación) 50/100\n- Listas enlazadas (Implementación) 45/100\n- Pilas y colas (Análisis) 48/100\n- Árboles (Diseño) 42/100\n- Modelo entidad-relación (Modelización) 52/100\n- SQL básico (SELECT, JOIN) (Implementación) 48/100\n- Normalización (Análisis) 45/100\n- Consultas avanzadas (Diseño) 40/100\nTemas aprobados: Sintaxis y variables\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "brechas": [
+        {
+          "tema": "Teoría de grafos",
+          "competencia": "Modelización",
+          "severidad": "alta",
+          "descripcion": "Confusión en la definición de conectividad de grafos.",
+          "evidencia": "Error en 'Sí, porque hay aristas que conectan los vértices.' El grafo no es conexo al no incluir el vértice 4."
+        },
+        {
+          "tema": "Relaciones y funciones",
+          "competencia": "Razonamiento",
+          "severidad": "alta",
+          "descripcion": "Dificultad en el razonamiento sobre relaciones y funciones.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        },
+        {
+          "tema": "Depuración de código",
+          "competencia": "Análisis",
+          "severidad": "alta",
+          "descripcion": "Problemas para identificar y corregir errores en el código.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        },
+        {
+          "tema": "Consultas avanzadas",
+          "competencia": "Diseño",
+          "severidad": "alta",
+          "descripcion": "Dificultad en el diseño de consultas SQL complejas.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        }
+      ],
+      "recomendaciones": [
+        {
+          "titulo": "Revisar conectividad de grafos",
+          "descripcion": "Estudiar la definición formal de grafos conexos y sus propiedades.",
+          "tipo": "repaso",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Practicar depuración",
+          "descripcion": "Realizar ejercicios de depuración paso a paso con herramientas.",
+          "tipo": "ejercicio",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Ejercicios de SQL avanzado",
+          "descripcion": "Resolver problemas de consultas complejas con subconsultas y funciones.",
+          "tipo": "ejercicio",
+          "prioridad": "alta"
+        }
+      ],
+      "ejercicios": [
+        {
+          "titulo": "¿Es conexo?",
+          "enunciado": "Determina si el grafo G con V={A,B,C,D} y E={(A,B),(B,C)} es conexo.",
+          "dificultad": "basico",
+          "tema": "Teoría de grafos",
+          "pista": "Considera todos los vértices del grafo."
+        },
+        {
+          "titulo": "Depuración de bucle",
+          "enunciado": "Encuentra el error en un código que suma números pares hasta N.",
+          "dificultad": "intermedio",
+          "tema": "Depuración de código",
+          "pista": "Revisa las condiciones del bucle y la inicialización."
+        },
+        {
+          "titulo": "Consulta de empleados",
+          "enunciado": "Obtén los nombres de empleados que ganan más que el promedio de su departamento.",
+          "dificultad": "avanzado",
+          "tema": "Consultas avanzadas",
+          "pista": "Usa subconsultas o funciones de ventana para el promedio."
+        }
+      ],
+      "resumen": "Se identifican brechas significativas en Teoría de Grafos, Depuración de Código y Consultas Avanzadas. Es crucial reforzar estos temas con repaso y práctica dirigida.",
+      "meta": {
+        "modelo": "google/gemini-2.5-flash",
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": {
+          "entrada": 561,
+          "salida": 804
+        },
+        "prompt": "Materia: varias\nNotas bajas (<70):\n- Estructuras de control (Resolución de problemas) 50/100\n- Funciones y modularidad (Diseño) 48/100\n- Depuración de código (Análisis) 45/100\n- Lógica proposicional (Razonamiento) 48/100\n- Conjuntos (Abstracción) 52/100\n- Relaciones y funciones (Razonamiento) 45/100\n- Teoría de grafos (Modelización) 40/100 | Evidencia: // Ejercicio: ¿Es conexo el grafo G con aristas {(1,2),(2,3)} y vértices {1,2,3,4}? // \"Sí, porque hay aristas que conectan los vértices.\"\n- Arreglos (Implementación) 50/100\n- Listas enlazadas (Implementación) 45/100\n- Pilas y colas (Análisis) 48/100\n- Árboles (Diseño) 42/100\n- Modelo entidad-relación (Modelización) 52/100\n- SQL básico (SELECT, JOIN) (Implementación) 48/100\n- Normalización (Análisis) 45/100\n- Consultas avanzadas (Diseño) 40/100\nTemas aprobados: Sintaxis y variables\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        },
+        "desdeCache": false
+      }
+    }
+  },
+  {
+    "codigo": "EST-007",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n- Consultas avanzadas (Diseño) 68/100\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Relaciones y funciones, Teoría de grafos, Arreglos, Listas enlazadas, Pilas y colas, Árboles, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "brechas": [
+        {
+          "tema": "Consultas avanzadas (Diseño)",
+          "competencia": "Diseño de consultas eficientes",
+          "severidad": "alta",
+          "descripcion": "Dificultad en la aplicación de consultas complejas.",
+          "evidencia": "68/100 en Consultas avanzadas (Diseño)"
+        }
+      ],
+      "recomendaciones": [
+        {
+          "titulo": "Reforzar diseño de consultas",
+          "descripcion": "Revisar principios de optimización y casos prácticos.",
+          "tipo": "repaso",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Práctica de consultas complejas",
+          "descripcion": "Realizar ejercicios con múltiples tablas y subconsultas.",
+          "tipo": "ejercicio",
+          "prioridad": "alta"
+        }
+      ],
+      "ejercicios": [
+        {
+          "titulo": "Consulta multi-tabla",
+          "enunciado": "Crea una consulta que una 3 tablas y filtre por 2 criterios.",
+          "dificultad": "intermedio",
+          "tema": "Consultas avanzadas (Diseño)",
+          "pista": "Usa JOIN y WHERE con AND/OR."
+        }
+      ],
+      "resumen": "Se detecta una brecha en Consultas avanzadas (Diseño) con una nota de 68/100. Se recomienda refuerzo y práctica en este tema.",
+      "meta": {
+        "modelo": "google/gemini-2.5-flash",
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": {
+          "entrada": 333,
+          "salida": 244
+        },
+        "prompt": "Materia: varias\nNotas bajas (<70):\n- Consultas avanzadas (Diseño) 68/100\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Depuración de código, Lógica proposicional, Conjuntos, Relaciones y funciones, Teoría de grafos, Arreglos, Listas enlazadas, Pilas y colas, Árboles, Modelo entidad-relación, SQL básico (SELECT, JOIN), Normalización\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        },
+        "desdeCache": false
+      }
+    }
+  },
+  {
+    "codigo": "EST-008",
+    "prompt": "Materia: varias\nNotas bajas (<70):\n- Depuración de código (Análisis) 68/100\n- Conjuntos (Abstracción) 68/100\n- Relaciones y funciones (Razonamiento) 65/100\n- Teoría de grafos (Modelización) 62/100\n- Árboles (Diseño) 48/100 | Evidencia: // Implementar BST insert function insert(root, val) { if (!root) return { value: val, left: null, right: null } // compara mal: inserta a la izquierda si MAYOR if (val > root.value) root.left = insert(root.left, val) else root.right = insert(root.right, val) return root } // \"Un BST ordena poniendo los mayores a la izquierda.\"\n- Normalización (Análisis) 68/100\n- Consultas avanzadas (Diseño) 65/100\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Lógica proposicional, Arreglos, Listas enlazadas, Pilas y colas, Modelo entidad-relación, SQL básico (SELECT, JOIN)\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+    "resultado": {
+      "brechas": [
+        {
+          "tema": "Árboles",
+          "competencia": "Diseño",
+          "severidad": "alta",
+          "descripcion": "Confusión fundamental en la propiedad de orden de los BST.",
+          "evidencia": "// compara mal: inserta a la izquierda si MAYOR if (val > root.value) root.left = insert(root.left, val) else root.right = insert(root.right, val) // 'Un BST ordena poniendo los mayores a la izquierda.'"
+        },
+        {
+          "tema": "Teoría de grafos",
+          "competencia": "Modelización",
+          "severidad": "media",
+          "descripcion": "Dificultad en la modelización de problemas con grafos.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        },
+        {
+          "tema": "Relaciones y funciones",
+          "competencia": "Razonamiento",
+          "severidad": "media",
+          "descripcion": "Problemas con el razonamiento abstracto de relaciones.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        },
+        {
+          "tema": "Consultas avanzadas",
+          "competencia": "Diseño",
+          "severidad": "media",
+          "descripcion": "Debilidad en el diseño de consultas SQL complejas.",
+          "evidencia": "Sin evidencia textual (solo nota)"
+        }
+      ],
+      "recomendaciones": [
+        {
+          "titulo": "Revisar BST",
+          "descripcion": "Estudiar la definición y propiedades de los árboles binarios de búsqueda.",
+          "tipo": "repaso",
+          "prioridad": "alta"
+        },
+        {
+          "titulo": "Ejercicios de grafos",
+          "descripcion": "Practicar la representación de problemas reales usando grafos.",
+          "tipo": "ejercicio",
+          "prioridad": "media"
+        },
+        {
+          "titulo": "Material de normalización",
+          "descripcion": "Consultar recursos sobre las formas normales en bases de datos.",
+          "tipo": "recurso",
+          "prioridad": "baja"
+        }
+      ],
+      "ejercicios": [
+        {
+          "titulo": "Implementar BST",
+          "enunciado": "Corrige la función `insert` para que un BST ordene correctamente.",
+          "dificultad": "intermedio",
+          "tema": "Árboles",
+          "pista": "Los valores mayores van a la derecha."
+        },
+        {
+          "titulo": "Grafo de ciudades",
+          "enunciado": "Modela un mapa de ciudades y rutas como un grafo.",
+          "dificultad": "basico",
+          "tema": "Teoría de grafos",
+          "pista": "Nodos son ciudades, aristas son rutas."
+        },
+        {
+          "titulo": "Consulta de agregación",
+          "enunciado": "Escribe una consulta que calcule el promedio de ventas por producto.",
+          "dificultad": "intermedio",
+          "tema": "Consultas avanzadas",
+          "pista": "Usa GROUP BY y AVG()."
+        }
+      ],
+      "resumen": "Se identifican brechas significativas en 'Árboles' (especialmente BST) y 'Teoría de grafos'. Es crucial reforzar estos temas con repaso y práctica dirigida.",
+      "meta": {
+        "modelo": "google/gemini-2.5-flash",
+        "versionPrompt": "v1.3",
+        "temperatura": 0.3,
+        "maxTokens": 1200,
+        "tokens": {
+          "entrada": 503,
+          "salida": 545
+        },
+        "prompt": "Materia: varias\nNotas bajas (<70):\n- Depuración de código (Análisis) 68/100\n- Conjuntos (Abstracción) 68/100\n- Relaciones y funciones (Razonamiento) 65/100\n- Teoría de grafos (Modelización) 62/100\n- Árboles (Diseño) 48/100 | Evidencia: // Implementar BST insert function insert(root, val) { if (!root) return { value: val, left: null, right: null } // compara mal: inserta a la izquierda si MAYOR if (val > root.value) root.left = insert(root.left, val) else root.right = insert(root.right, val) return root } // \"Un BST ordena poniendo los mayores a la izquierda.\"\n- Normalización (Análisis) 68/100\n- Consultas avanzadas (Diseño) 65/100\nTemas aprobados: Sintaxis y variables, Estructuras de control, Funciones y modularidad, Lógica proposicional, Arreglos, Listas enlazadas, Pilas y colas, Modelo entidad-relación, SQL básico (SELECT, JOIN)\n\nDevuelve JSON con esta forma:\n{\"brechas\":[{\"tema\":\"\",\"competencia\":\"\",\"severidad\":\"alta|media|baja\",\"descripcion\":\"\",\"evidencia\":\"\"}],\"recomendaciones\":[{\"titulo\":\"\",\"descripcion\":\"\",\"tipo\":\"repaso|ejercicio|recurso|estrategia\",\"prioridad\":\"alta|media|baja\"}],\"ejercicios\":[{\"titulo\":\"\",\"enunciado\":\"\",\"dificultad\":\"basico|intermedio|avanzado\",\"tema\":\"\",\"pista\":\"\"}],\"resumen\":\"\"}\n\nReglas: máx 4 brechas (alta primero), 3 recomendaciones, 3 ejercicios. Cada texto ≤25 palabras; resumen ≤2 oraciones. Cita el tema exacto y el error concreto de la evidencia. Si un tema no tiene evidencia textual, escribe en evidencia: \"Sin evidencia textual (solo nota)\" y no inventes errores.",
+        "validacion": {
+          "esquemaValido": true,
+          "brechasNoAncladas": 0,
+          "ejerciciosNoAnclados": 0
+        },
+        "desdeCache": false
+      }
+    }
+  }
+]
